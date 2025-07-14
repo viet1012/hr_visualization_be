@@ -1,6 +1,6 @@
 package com.example.hr_visualization_be.service;
 
-import com.example.hr_visualization_be.dto.OvertimeSummaryDTO;
+import com.example.hr_visualization_be.dto.OvertimeViolationSummaryDTO;
 import com.example.hr_visualization_be.repository.OvertimeViolationDaily12hRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +16,9 @@ public class OvertimeViolationDaily12hService {
     @Autowired
     private OvertimeViolationDaily12hRepository repository;
 
-    public List<OvertimeSummaryDTO> getDaily12hOvertimeByMonth(String monthInput) {
+    public List<OvertimeViolationSummaryDTO> getDaily12hOvertimeByMonth(String monthInput) {
         List<Object[]> results = repository.getOvertimeDaily12hByMonth(monthInput);
-        List<OvertimeSummaryDTO> dtos = new ArrayList<>();
+        List<OvertimeViolationSummaryDTO> dtos = new ArrayList<>();
 
         for (Object[] row : results) {
             String dept = (String) row[0];
@@ -26,7 +26,7 @@ public class OvertimeViolationDaily12hService {
             LocalDate tuNgay = ((Date) row[2]).toLocalDate();
             LocalDate denNgay = ((Date) row[3]).toLocalDate();
 
-            OvertimeSummaryDTO dto = new OvertimeSummaryDTO(dept, tongLanVuot12Gio, tuNgay, denNgay);
+            OvertimeViolationSummaryDTO dto = new OvertimeViolationSummaryDTO(dept, tongLanVuot12Gio, tuNgay, denNgay);
             dtos.add(dto);
         }
 

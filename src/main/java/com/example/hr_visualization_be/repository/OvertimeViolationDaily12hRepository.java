@@ -1,6 +1,5 @@
 package com.example.hr_visualization_be.repository;
 
-import com.example.hr_visualization_be.dto.OvertimeSummaryDTO;
 import com.example.hr_visualization_be.model.DummyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

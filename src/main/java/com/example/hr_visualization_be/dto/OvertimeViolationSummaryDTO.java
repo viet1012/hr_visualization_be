@@ -2,17 +2,17 @@ package com.example.hr_visualization_be.dto;
 
 import java.time.LocalDate;
 
-public class OvertimeSummaryDTO {
+public class OvertimeViolationSummaryDTO {
 
     private String dept;
     private Integer tongLanVuot12Gio;
     private LocalDate tuNgayThangLamViec;
     private LocalDate denNgayThangLamViec;
 
-    public OvertimeSummaryDTO() {
+    public OvertimeViolationSummaryDTO() {
     }
 
-    public OvertimeSummaryDTO(String dept, Integer tongLanVuot12Gio, LocalDate tuNgayThangLamViec, LocalDate denNgayThangLamViec) {
+    public OvertimeViolationSummaryDTO(String dept, Integer tongLanVuot12Gio, LocalDate tuNgayThangLamViec, LocalDate denNgayThangLamViec) {
         this.dept = dept;
         this.tongLanVuot12Gio = tongLanVuot12Gio;
         this.tuNgayThangLamViec = tuNgayThangLamViec;
