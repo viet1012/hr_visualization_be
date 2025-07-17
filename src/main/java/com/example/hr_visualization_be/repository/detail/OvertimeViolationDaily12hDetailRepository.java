@@ -1,6 +1,5 @@
-package com.example.hr_visualization_be.repository;
+package com.example.hr_visualization_be.repository.detail;
 
-import com.example.hr_visualization_be.dto.OvertimeViolationDetailDTO;
 import com.example.hr_visualization_be.model.DummyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface OvertimeViolationDetailRepository extends JpaRepository<DummyEntity, Long> {
+public interface OvertimeViolationDaily12hDetailRepository extends JpaRepository<DummyEntity, Long> {
     @Query(value = """
         DECLARE @monthInput VARCHAR(7) = :monthInput;
         DECLARE @dept NVARCHAR(100) = :dept;
@@ -20,7 +19,7 @@ public interface OvertimeViolationDetailRepository extends JpaRepository<DummyEn
         DECLARE @end DATE = DATEADD(DAY, -1, DATEFROMPARTS(@year, @month + 1, 21));
 
         WITH CleanData AS (
-            SELECT 
+            SELECT
                 d.Dept,
                 d.Code AS Ma_NV,
                 d.Name AS Ten_NV,
@@ -29,11 +28,11 @@ public interface OvertimeViolationDetailRepository extends JpaRepository<DummyEn
                 TRY_CAST(w.Tong_gio_lam_viec AS FLOAT) AS Gio_WT,
                 TRY_CAST(w.Tong_so_gio_OT AS FLOAT) AS Gio_OT,
                 (TRY_CAST(w.Tong_gio_lam_viec AS FLOAT) + TRY_CAST(w.Tong_so_gio_OT AS FLOAT)) AS Tong_Gio
-            FROM [F2Database].[dbo].[F2_HR_WT] w
+            FROM [F2Database].[dbo].[F2_HR_WT_OT] w
             JOIN [F2Database].[dbo].[F2_HR_Data] d
                 ON w.group_name = d.[Group]
                AND w.Ma_NV = d.Code
-            WHERE 
+            WHERE
                 TRY_CAST(w.Ngay_cong AS DATE) BETWEEN @start AND @end
                 AND TRY_CAST(w.Tong_gio_lam_viec AS FLOAT) IS NOT NULL
                 AND TRY_CAST(w.Tong_so_gio_OT AS FLOAT) IS NOT NULL
@@ -44,5 +43,5 @@ public interface OvertimeViolationDetailRepository extends JpaRepository<DummyEn
         FROM CleanData
         ORDER BY Ma_NV, Ngay_cong;
         """, nativeQuery = true)
-    List<Object[]> getOvertimeDetailByDeptAndMonth(@Param("monthInput") String monthInput, @Param("dept") String dept);
+    List<Object[]> getOvertime12HDetailByDeptAndMonth(@Param("monthInput") String monthInput, @Param("dept") String dept);
 }

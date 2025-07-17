@@ -1,7 +1,7 @@
 package com.example.hr_visualization_be.controller.details;
 
 import com.example.hr_visualization_be.dto.OvertimeViolationDetailDTO;
-import com.example.hr_visualization_be.service.OvertimeViolationDaily12hDetailService;
+import com.example.hr_visualization_be.service.detail.OvertimeViolationDaily12hDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

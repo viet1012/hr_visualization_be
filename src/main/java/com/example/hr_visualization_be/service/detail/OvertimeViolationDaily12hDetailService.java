@@ -1,12 +1,10 @@
-package com.example.hr_visualization_be.service;
+package com.example.hr_visualization_be.service.detail;
 
 import com.example.hr_visualization_be.dto.OvertimeViolationDetailDTO;
-import com.example.hr_visualization_be.repository.OvertimeViolationDetailRepository;
+import com.example.hr_visualization_be.repository.detail.OvertimeViolationDaily12hDetailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,10 +13,10 @@ import java.util.stream.Collectors;
 public class OvertimeViolationDaily12hDetailService {
 
     @Autowired
-    private  OvertimeViolationDetailRepository repository;
+    private OvertimeViolationDaily12hDetailRepository repository;
 
     public List<OvertimeViolationDetailDTO> getDetails(String monthInput, String dept) {
-        return repository.getOvertimeDetailByDeptAndMonth(monthInput, dept).stream()
+        return repository.getOvertime12HDetailByDeptAndMonth(monthInput, dept).stream()
                 .map(row -> new OvertimeViolationDetailDTO(
                         (String) row[0], // Dept
                         (String) row[1], // Group_Name
